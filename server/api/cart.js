@@ -1,9 +1,10 @@
 const router = require('express').Router()
-const {Mug} = require('../db/models')
+const {Mug, Order, MugsOrder, User} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
+    console.log(req.user)
     if (req.user) {
       const cart = await req.user.getCart()
       res.json(cart)
@@ -37,6 +38,31 @@ router.put('/add', async (req, res, next) => {
 
     res.json(cartMug)
   } catch (error) {
+    next(error)
+  }
+})
+
+// Quantity of Mugs in Cart
+router.put('/:id', async (req, res, next) => {
+  const mugId = req.params.id
+  const addedQuantity = req.body.quantity
+
+  try {
+    if (req.body.cartId !== req.user.dataValues.cartId) {
+      res.send('You are not authorized to update this cart')
+    } else {
+      const updatedOrder = await User.updateMugQuantity(
+        req.body.cartId,
+        mugId,
+        addedQuantity
+      )
+      res.json(updatedOrder)
+    }
+  } catch (error) {
+    console.error(
+      'An error occurred while updating mug quantity Error: ',
+      error
+    )
     next(error)
   }
 })

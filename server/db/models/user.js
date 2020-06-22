@@ -2,6 +2,8 @@ const crypto = require('crypto')
 const Sequelize = require('sequelize')
 const db = require('../db')
 const Order = require('./order')
+const Mug = require('./mug')
+const MugOrder = require('./mugOrder')
 
 const User = db.define('user', {
   isAdmin: {
@@ -85,6 +87,30 @@ User.prototype.addMugToCart = async function(mug) {
     let cart = await Order.findByPk(this.cartId)
     cart.addMug(mug, {through: {price: mug.price}})
   }
+}
+
+User.updateMugQuantity = async function(orderId, mugId, qty) {
+  const cartedMug = await MugOrder.findOne({
+    where: {
+      orderId: orderId,
+      mugId: mugId
+    }
+  })
+  const mug = await Mug.findByPk(mugId)
+
+  await cartedMug.update({
+    quantity: qty
+  })
+  const {id, title, description, price, imgUrl} = mug.dataValues
+  const updatedMugCount = {
+    id: id,
+    title: title,
+    description: description,
+    price: price,
+    imgUrl: imgUrl,
+    quantity: qty
+  }
+  return updatedMugCount
 }
 
 /**

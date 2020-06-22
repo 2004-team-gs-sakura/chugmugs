@@ -3,7 +3,16 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {Mug} from '.'
 import {getAllMugsThunk} from '../store/allMugs'
-
+import {
+  Container,
+  Row,
+  Col,
+  CardGroup,
+  CardDeck,
+  Card,
+  Pagination,
+  PageItem
+} from 'react-bootstrap'
 class AllMugs extends Component {
   componentDidMount() {
     this.props.loadMugs()
@@ -11,14 +20,20 @@ class AllMugs extends Component {
 
   render() {
     const {mugs} = this.props
-
     return mugs === undefined || !mugs.length ? (
-      <h1>No Current Mug Listings</h1>
+      <h1>Loading mugs...</h1>
     ) : (
       <React.Fragment>
         <h3>Which Mug Will You Chug?</h3>
+
         <div id="mug-list">
-          {mugs.map(mug => <Mug key={mug.id} {...mug} />)}
+          {/* <CardDeck> */}
+          {mugs.map(mug => (
+            // <Card>
+
+            <Mug key={mug.id} {...mug} />
+          ))}
+          {/* </CardDeck> */}
         </div>
       </React.Fragment>
     )
