@@ -6,21 +6,23 @@ const db = require('../db')
 const app = require('../index')
 const User = db.model('user')
 
-xdescribe('User routes', () => {
+describe('User routes', () => {
   beforeEach(() => {
     return db.sync({force: true})
   })
 
   describe('/api/users/', () => {
     const codysEmail = 'cody@puppybook.com'
+    const codysPassword = '12345'
 
     beforeEach(() => {
       return User.create({
-        email: codysEmail
+        email: codysEmail,
+        password: codysPassword
       })
     })
 
-    it('GET /api/users', async () => {
+    xit('GET /api/users', async () => {
       const res = await request(app)
         .get('/api/users')
         .expect(200)
