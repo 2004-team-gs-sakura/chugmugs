@@ -16,15 +16,14 @@ class AllMugs extends Component {
       <h1>No Current Mug Listings</h1>
     ) : (
       <div>
-        <h3>Which Mug Will You Chug?</h3>
-        <div id="mug-list">
+        <h3 id="mugs-heading">Which Mug Will You Chug?</h3>
+        <div className="mug-list">
           {mugs.map(mug => <Mug key={mug.id} mug={mug} />)}
         </div>
       </div>
     )
   }
 }
-
 const mapState = state => {
   return {
     mugs: state.mugs

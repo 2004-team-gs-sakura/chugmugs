@@ -14,7 +14,7 @@ const SingleMug = ({addMugToCart, location}) => {
         <div>
           <div className="single-mug">
             <h2>{mug.title}</h2>
-            <img src={mug.imgUrl} />
+            <img id="mug-pic" src={mug.imgUrl} />
             <h4>Color: {mug.color}</h4>
             <h4>Capacity: {mug.capacity}oz</h4>
             <h4>Price: ${mug.price / 100}</h4>

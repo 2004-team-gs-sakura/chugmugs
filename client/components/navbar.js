@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 import {logout} from '../store/user'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
-  <div>
+  <div className="sticky">
     <Link to="/home">
       <h1>ChugMugs</h1>
     </Link>
@@ -24,7 +24,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           <Link to="/signup">Sign Up</Link>
         </div>
       )}
-      <div>
+      <div className="component-links">
         <Link to="/mugs">Browse Mugs</Link>
         <Link to="/cart">Cart</Link>
       </div>
