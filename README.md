@@ -1,6 +1,7 @@
 # ChugMugs
 
 An E-commerce website for browsing and carting mugs, developed by Fullstack Academy senior students:
+
 Barish Poole, Vasyl Semak, Ian Gelfand, Angel Concepcion
 
 Production Link: https://chugmugs.herokuapp.com/
